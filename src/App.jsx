@@ -6,6 +6,11 @@ import DashLayout from "./components/DashLayout";
 import Welcome from "./features/auth/Welcome";
 import NotesList from "./features/notes/NotesList";
 import UsersList from "./features/users/UsersList";
+import EditUser from "./features/users/EditUser";
+import NewUserForm from "./features/users/NewUserForm";
+import EditNotes from "./features/notes/EditNotes";
+import NewNote from "./features/notes/NewNote";
+import PreFetch from "./features/auth/PreFetch";
 
 function App() {
   return (
@@ -17,18 +22,25 @@ function App() {
 
           <Route path="login" element={<Login />} />
 
-          <Route path="dash" element={<DashLayout />}>
 
-            <Route index element={<Welcome />}/>
+          <Route element={<PreFetch />}>
+            <Route path="dash" element={<DashLayout />}>
 
-            <Route path="notes">
-              <Route index element={<NotesList />}/>
+              <Route index element={<Welcome />}/>
+
+              <Route path="notes">
+                <Route index element={<NotesList />}/>
+                <Route path=":id" element={<EditNotes />} />
+                <Route path="new" element={<NewNote />} />
+              </Route>
+
+              <Route path="users">
+                <Route index element={<UsersList />}/>
+                <Route path=":id" element={<EditUser />} />
+                <Route path="new" element={<NewUserForm />} />
+              </Route>
+              
             </Route>
-
-            <Route path="users">
-              <Route index element={<UsersList />}/>
-            </Route>
-            
           </Route>
 
         </Route>
